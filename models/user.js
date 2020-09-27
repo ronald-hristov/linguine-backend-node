@@ -1,17 +1,24 @@
-const users = [];
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-module.exports = class User {
-    constructor(name, email, password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+const userSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    username: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    type: {
+        type: String,
+        required: true,
+        default: "member"
     }
+});
 
-    save() {
-        users.push(this);
-    }
-
-    fetchAll() {
-
-    }
-}
+module.exports = mongoose.model('User', userSchema);
