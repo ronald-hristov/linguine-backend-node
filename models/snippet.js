@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const snippetSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+    },
     contents: {
         type: String,
         required: true,
@@ -30,6 +34,10 @@ const snippetSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'User'
+    },
+    date: {
+        type: Date,
+        required: true
     },
     isLiked: {
         type: Boolean,

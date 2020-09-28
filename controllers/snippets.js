@@ -5,13 +5,17 @@ exports.get = (request, response, next) => {
     // all shared
 
     // if admin all
-    Snippet.find()
+    Snippet.find({type: "shared"})
         // .select('-_id')
+        .sort('-date')
         .populate('userId', 'name')
         .populate('likes.users.userId', 'name')
         .then(snippets => {
             snippets.map(snippet => {
-                snippet.isLikedByCurrentUser(request.user);
+                if (request.user) {
+                    snippet.isLikedByCurrentUser(request.user);
+                }
+
                 return snippet;
             })
 
@@ -86,12 +90,14 @@ exports.create = (request, response, next) => {
 
     // create snippet
     const snippet = new Snippet({
+        title: request.body.title,
         contents: request.body.contents,
         tags: request.body.tags,
-        type: request.body.type,
+        type: request.body.type ? request.body.type : "shared",
         likes: {
             users: []
         },
+        date: new Date(),
         userId: request.user
     });
     snippet.save()

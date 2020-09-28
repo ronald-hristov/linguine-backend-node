@@ -1,0 +1,18 @@
+module.exports = {
+    apps: [{
+        name: "app",
+        script: "./app.js",
+        env: {
+            NODE_ENV: "development",
+            "MONGO_URI": "mongodb://usernamae:pass@host:port/schema",
+            "PORT": 3000,
+            "SESSION_SECRET": "secret_string",
+        },
+        env_production: {
+            NODE_ENV: "production",
+            "MONGO_URI": "mongodb://usernamae:pass@host:port/schema",
+            "PORT": 3000,
+            "SESSION_SECRET": "secret_string",
+        }
+    }]
+}
