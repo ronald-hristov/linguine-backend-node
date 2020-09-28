@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "7b50c68b-9682-4819-82d5-a4350ca3c8ad",
+		"name": "Linguine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/auth",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"John\",\r\n    \"username\": \"myUser\",\r\n    \"password\": \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/signup",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"myUser\",\r\n    \"password\": \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Snippets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/snippets",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"snippets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Snippets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/snippets/user/5f6f58fd0414414492fe1dc8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"snippets",
+						"user",
+						"5f6f58fd0414414492fe1dc8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Snippet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a811da86-cf32-47cb-96ea-3f4ce5c158a5",
+						"exec": [
+							"tests[\"Status code is 201\"] = responseCode.code === 201;\r",
+							"\r",
+							"var body = JSON.parse(responseBody);\r",
+							"if (responseCode.code === 201) {\r",
+							"    postman.setEnvironmentVariable(\"snippetId\", body.id);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"contents\": \"<h1>opa</h1>\\n<p>kak</p>\",\r\n    \"tags\": [\"html\"],\r\n    \"type\": \"shared\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/snippets",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"snippets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Snippet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/snippets/{{snippetId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"snippets",
+						"{{snippetId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Snippet",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/snippets/{{snippetId}}/like",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"snippets",
+						"{{snippetId}}",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Snippet",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/snippets/{{snippetId}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"snippets",
+						"{{snippetId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/tags",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
